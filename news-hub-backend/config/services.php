@@ -14,6 +14,13 @@ return [
     |
     */
 
+    'newsapi' => [
+        'key' => env('NEWS_API_KEY'),
+    ],
+    'nyt' => [
+        'key' => env('NEWYORK_API_KEY'),
+    ],
+
     'postmark' => [
         'token' => env('POSTMARK_TOKEN'),
     ],
