@@ -1,12 +1,8 @@
 import { useInfiniteQuery, UseInfiniteQueryResult } from "@tanstack/react-query";
-import { QueryParams } from "../types";
 import { apiClient } from "../utils/ApiClient";
+import { FetchDataParams } from "../types";
 
-interface FetchDataParams {
-  endpoint: string;
-  queryKey: string;
-  query: QueryParams;
-}
+
 
 const useFetchDataWithScroll = ({ endpoint, queryKey, query }: FetchDataParams): UseInfiniteQueryResult => {
   const fetchDataWithInfiniteScroll = async ({ pageParam = 1 }) =>

@@ -15,6 +15,10 @@ export interface userProps {
     read_time: string;
     published_at: string;
   }
+
+  export interface ArtcileResponse {
+    data: Article;
+  }
   
  export interface ArticleCardProps {
     article: Article;
@@ -32,3 +36,24 @@ export interface userProps {
       total: number;
     };
   }
+
+
+  export interface ArticleFilters {
+    search: string;
+    category: string;
+    startDate: string;
+    endDate: string;
+  }
+
+  export interface FetchDataParams {
+    endpoint: string;
+    queryKey: (string | QueryParams)[];
+    query: QueryParams;
+  }
+
+  export interface UserPreference {
+    categories: string[];
+    sources: string[];
+    authors: string[];
+  }
+  

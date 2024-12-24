@@ -18,8 +18,26 @@ class ArticleController extends Controller
 
 
         if ($request->has('search')) {
-            $query->where('title', 'like', '%' . $request->search . '%');
+            $query->where(function ($q) use ($request) {
+                $q->where('title', 'like', '%' . $request->search . '%')
+                    ->orWhere('content', 'like', '%' . $request->search . '%');
+            });
         }
+
+
+        if ($request->filled('category') && $request->category !== '') {
+            $query->where('category', $request->category);
+        }
+
+        if ($request->filled('startDate') && $request->startDate !== '') {
+            $query->whereDate('published_at', '>=', $request->startDate);
+        }
+
+        if ($request->filled('endDate') && $request->endDate !== '') {
+            $query->whereDate('published_at', '<=', $request->endDate);
+        }
+
+        $query->latest('published_at');
 
         $articles = $query->paginate($request->get('per_page', 10));
 

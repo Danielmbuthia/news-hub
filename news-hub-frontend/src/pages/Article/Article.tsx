@@ -1,7 +1,7 @@
 import { format } from "date-fns";
 import { useParams } from "react-router-dom";
 import useFetchData from "../../hooks/useFetchData";
-import { Article as ArticleType } from "../../types";
+import { ArtcileResponse as ArticleType } from "../../types";
 
 const Article = () => {
   const { id } = useParams();
@@ -9,7 +9,7 @@ const Article = () => {
     data: article,
     isLoading,
     error,
-  } = useFetchData<ArticleType>(`/articles/${id}`, ["article"]);
+  } = useFetchData<ArticleType>(`/articles/${id}`, ["article", id]);
 
   if (isLoading) {
     return (
@@ -27,7 +27,7 @@ const Article = () => {
     );
   }
 
-  if (!article) {
+  if (!article?.data) {
     return (
       <div className="flex justify-center items-center min-h-screen">
         <div className="text-gray-600">Article not found</div>
@@ -39,20 +39,22 @@ const Article = () => {
     <article className="max-w-4xl mx-auto px-4 py-8">
       <div className="flex items-center space-x-4 text-sm text-gray-600 mb-4">
         <span className="bg-gray-100 px-3 py-1 rounded-full">
-          {article.category}
+          {article?.data.category}
         </span>
-        <time dateTime={article.published_at}>
-          {format(new Date(article.published_at), "MMMM d, yyyy")}
+        <time dateTime={article?.data.published_at}>
+          {format(new Date(article?.data.published_at), "MMMM d, yyyy")}
         </time>
       </div>
 
-      <h1 className="text-4xl font-bold text-gray-900 mb-6">{article.title}</h1>
+      <h1 className="text-4xl font-bold text-gray-900 mb-6">
+        {article?.data.title}
+      </h1>
 
-      {article.image_url && (
+      {article?.data.image_url && (
         <div className="relative h-[400px] mb-8 rounded-lg overflow-hidden">
           <img
-            src={article.image_url}
-            alt={article.title}
+            src={article?.data.image_url}
+            alt={article?.data.title}
             className="object-cover w-full h-full"
           />
         </div>
@@ -60,7 +62,7 @@ const Article = () => {
 
       <div
         className="max-w-none"
-        dangerouslySetInnerHTML={{ __html: article.content }}
+        dangerouslySetInnerHTML={{ __html: article?.data.content }}
       />
     </article>
   );

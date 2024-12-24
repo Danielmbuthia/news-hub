@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PreferenceController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,5 +15,9 @@ Route::prefix('v1')->group(function () {
         Route::get('/user', function (Request $request) {
             return $request->user();
         })->name('v1.user');
+        Route::get('/preferences', [PreferenceController::class, 'index']);
+        Route::post('/preferences', [PreferenceController::class, 'update']);
+        Route::get('/preferences/options', [PreferenceController::class, 'getOptions']);
+        Route::get('/feed/personalized', [PreferenceController::class, 'getPersonalizedFeed']);
     });
 });

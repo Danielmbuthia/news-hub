@@ -30,6 +30,6 @@ export const getToken = () => {
 }
 
 export async function logout() {
-    await apiClient.post('logout')
+    await apiClient.post('logout');
     localStorage.removeItem(tokenName);
 }

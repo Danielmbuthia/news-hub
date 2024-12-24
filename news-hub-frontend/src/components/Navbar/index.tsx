@@ -5,7 +5,6 @@ import UserContext from "../../contexts/userContext";
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const user = useContext(UserContext);
-
   return (
     <header className="relative">
       <nav>
@@ -44,7 +43,12 @@ const Navbar = () => {
           <div className="hidden lg:flex space-x-4">
             {user && user?.id ? (
               <>
-                {" "}
+                <NavLink to="/preferences" className="nav-link block py-3 px-4">
+                  Preferences
+                </NavLink>
+                <NavLink to="/feeds" className="nav-link block py-3 px-4">
+                  Feed
+                </NavLink>
                 <NavLink to="/logout" className="nav-link block py-3 px-4">
                   Logout
                 </NavLink>
@@ -70,6 +74,12 @@ const Navbar = () => {
         >
           {user && user?.id ? (
             <>
+              <NavLink to="/#" className="nav-link block py-3 px-4">
+                Preferences
+              </NavLink>
+              <NavLink to="/#" className="nav-link block py-3 px-4">
+                Feed
+              </NavLink>
               <NavLink to="/logout" className="nav-link block py-3 px-4">
                 Logout
               </NavLink>

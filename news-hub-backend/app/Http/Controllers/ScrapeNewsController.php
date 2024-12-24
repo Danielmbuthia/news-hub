@@ -47,7 +47,7 @@ class ScrapeNewsController extends Controller
                     'source' => 'New York Times',
                     'category' => 'Technology',
                     'published_at' => $article['published_date'],
-                    'image_url' => $article['urlToImage'] ?? ''
+                    'image_url' => $article['multimedia'][0]['url'] ?? ''
                 ]
             );
         }
