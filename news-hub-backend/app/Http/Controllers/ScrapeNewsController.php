@@ -16,7 +16,7 @@ class ScrapeNewsController extends Controller
 
     public function fetchAndStoreArticles()
     {
-        // Fetch articles from NewsAPI
+
         $newsApiData = $this->newsService->fetchNewsApiArticles(['q' => 'technology', 'language' => 'en']);
 
         foreach ($newsApiData['articles'] as $article) {
@@ -34,7 +34,7 @@ class ScrapeNewsController extends Controller
             );
         }
 
-        // Fetch articles from New York Times
+
         $nytData = $this->newsService->fetchNytArticles('technology');
 
         foreach ($nytData['results'] as $article) {
@@ -48,6 +48,23 @@ class ScrapeNewsController extends Controller
                     'category' => 'Technology',
                     'published_at' => $article['published_date'],
                     'image_url' => $article['multimedia'][0]['url'] ?? ''
+                ]
+            );
+        }
+
+        $guadianData = $this->newsService->fetchGuardianArticles();
+
+        foreach ($guadianData['results'] as $article) {
+            Article::updateOrCreate(
+                ['url' => $article['webUrl']],
+                [
+                    'title' => $article['webTitle'],
+                    'content' => $article['webTitle'] ?? '',
+                    'author' => $article['sectionName'] ?? 'Unknown',
+                    'source' => 'The Guardian',
+                    'category' => $article['pillarName'],
+                    'published_at' => $article['webPublicationDate'],
+                    'image_url' => ''
                 ]
             );
         }

@@ -20,6 +20,9 @@ return [
     'nyt' => [
         'key' => env('NEWYORK_API_KEY'),
     ],
+    'guardian' => [
+        'key' => env('GUARDIN_API_KEY'),
+    ],
 
     'postmark' => [
         'token' => env('POSTMARK_TOKEN'),

@@ -12,10 +12,14 @@ class NewsApiService
     protected $nytBaseUrl = 'https://api.nytimes.com/svc/topstories/v2';
     protected $nytApiKey;
 
+    protected $guardianUrl = "https://content.guardianapis.com/search";
+    protected $guardianKey;
+
     public function __construct()
     {
         $this->newsApiKey = config('services.newsapi.key');
         $this->nytApiKey = config('services.nyt.key');
+        $this->guardianKey = config('service.guardian.key');
     }
 
     public function fetchNewsApiArticles($queryParams = [])
@@ -42,5 +46,18 @@ class NewsApiService
         }
 
         throw new \Exception('Error fetching articles from New York Times: ' . $response->body());
+    }
+
+    public function fetchGuardianArticles()
+    {
+        $response = Http::get($this->guardianUrl, [
+            'api-key' => $this->guardianKey,
+        ]);
+
+        if ($response->successful()) {
+            return $response->json();
+        }
+
+        throw new \Exception('Error fetching articles from The Guardian: ' . $response->body());
     }
 }

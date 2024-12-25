@@ -32,7 +32,7 @@
     @apply p-4 md:p-5 max-w-screen-lg mx-auto flex items-center justify-between;
   }
   main {
-    @apply max-w-screen-lg mx-auto px-4 md:px-6 py-6;
+    @apply max-w-7xl mx-auto px-4 md:px-6 py-6;
   }
 
   .text-link {
