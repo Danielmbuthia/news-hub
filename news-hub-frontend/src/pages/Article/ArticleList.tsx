@@ -112,7 +112,7 @@ const ArticleList = () => {
         </div>
       )}
 
-      {!hasNextPage && articles?.pages[0]?.data?.length > 0 && (
+      {!hasNextPage && (
         <div className="text-center text-gray-600 p-4">
           No more articles to load
         </div>

@@ -74,10 +74,10 @@ const Navbar = () => {
         >
           {user && user?.id ? (
             <>
-              <NavLink to="/#" className="nav-link block py-3 px-4">
+              <NavLink to="/preferences" className="nav-link block py-3 px-4">
                 Preferences
               </NavLink>
-              <NavLink to="/#" className="nav-link block py-3 px-4">
+              <NavLink to="/feeds" className="nav-link block py-3 px-4">
                 Feed
               </NavLink>
               <NavLink to="/logout" className="nav-link block py-3 px-4">

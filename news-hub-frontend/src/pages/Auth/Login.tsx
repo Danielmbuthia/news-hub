@@ -38,9 +38,7 @@ export default function Login() {
     }
   };
 
-  console.log(user);
   if (user) {
-    console.log(user);
     navigate("/");
   }
 

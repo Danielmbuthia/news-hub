@@ -1,8 +1,10 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { signUpAPIService } from "../../services/UserApiService";
+import { useNavigate } from "react-router-dom";
+import UserContext from "../../contexts/userContext";
 
 const schema = z
   .object({
@@ -26,6 +28,8 @@ type SchemaProps = z.infer<typeof schema>;
 
 const Register = () => {
   const [formError, setFormError] = useState("");
+  const navigate = useNavigate();
+  const user = useContext(UserContext);
 
   const {
     register,
@@ -45,6 +49,10 @@ const Register = () => {
       }
     }
   };
+
+  if (user) {
+    navigate("/");
+  }
 
   return (
     <section className="flex items-center justify-center rounded-md">

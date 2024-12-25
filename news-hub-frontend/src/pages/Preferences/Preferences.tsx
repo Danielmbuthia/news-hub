@@ -13,7 +13,6 @@ const Preferences = () => {
     });
 
   console.log(selectedPreferences);
-  console.log(preferences);
 
   useEffect(() => {
     if (preferences) {
@@ -26,12 +25,20 @@ const Preferences = () => {
     value: string,
     checked: boolean
   ) => {
-    setSelectedPreferences((prev) => ({
-      ...prev,
-      [type]: checked
-        ? [...prev[type], value]
-        : prev[type].filter((item) => item !== value),
-    }));
+    setSelectedPreferences((prev) => {
+      const updated = { ...prev };
+      console.log(updated);
+      console.log(type);
+      if (!updated[type]) {
+        updated[type] = [];
+      }
+      if (checked) {
+        updated[type] = [...updated[type], value];
+      } else {
+        updated[type] = updated[type].filter((item) => item !== value);
+      }
+      return updated;
+    });
   };
 
   const handleSave = () => {
@@ -58,7 +65,7 @@ const Preferences = () => {
             <label key={category} className="flex items-center space-x-2">
               <input
                 type="checkbox"
-                checked={selectedPreferences.categories.includes(category)}
+                checked={selectedPreferences?.categories?.includes(category)}
                 onChange={(e) =>
                   handleSelectionChange(
                     "categories",
@@ -82,7 +89,7 @@ const Preferences = () => {
             <label key={source} className="flex items-center space-x-2">
               <input
                 type="checkbox"
-                checked={selectedPreferences.sources.includes(source)}
+                checked={selectedPreferences?.sources?.includes(source)}
                 onChange={(e) =>
                   handleSelectionChange("sources", source, e.target.checked)
                 }
@@ -102,7 +109,7 @@ const Preferences = () => {
             <label key={author} className="flex items-center space-x-2">
               <input
                 type="checkbox"
-                checked={selectedPreferences.authors.includes(author)}
+                checked={selectedPreferences?.authors?.includes(author)}
                 onChange={(e) =>
                   handleSelectionChange("authors", author, e.target.checked)
                 }

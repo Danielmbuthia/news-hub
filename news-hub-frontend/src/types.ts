@@ -56,4 +56,8 @@ export interface userProps {
     sources: string[];
     authors: string[];
   }
+
+  export interface ArticleResponse  {
+    pages: PaginatedResponse[]; 
+};
   

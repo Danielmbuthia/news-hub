@@ -1,15 +1,15 @@
 import ArticleCard from "../../components/Articles/ArticleCard";
 import useFetchData from "../../hooks/useFetchData";
-import { Article } from "../../types";
+import { Article, PaginatedResponse } from "../../types";
 
 const Feed = () => {
   const {
     data: articles,
     isLoading,
     error,
-  } = useFetchData("/feed/personalized", ["feed"]);
+  } = useFetchData<PaginatedResponse>("/feed/personalized", ["feed"]);
 
-  console.log(articles?.data);
+  // console.log(articles?.data);
 
   if (isLoading) {
     return (

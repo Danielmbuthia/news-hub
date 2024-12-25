@@ -6,9 +6,13 @@ import useFetchData from "./useFetchData";
 export const usePreferences = () => {
   const queryClient = useQueryClient();
 
-  const { data: preferences, isLoading: preferencesLoading } = useFetchData('/preferences', ['preferences']);
+  const { data: preferences, isLoading: preferencesLoading } = useFetchData<{
+    data: UserPreference;
+  }>('/preferences', ['preferences']);
 
-  const { data: options, isLoading: optionsLoading } = useFetchData('/preferences/options', ['options'], {}, 0);
+  const { data: options, isLoading: optionsLoading } = useFetchData<{
+    data: { categories: string[]; sources: string[]; authors: string[] };
+  }>('/preferences/options', ['options'], {}, 0);
   
 
 
