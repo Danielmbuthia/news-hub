@@ -40,3 +40,7 @@ run docker-compose build
 then run docker-compose up
 
 then visit `http:localhost:5173`
+
+![Project Overview](images/Screenshot from 2024-12-25 03-41-26.png)
+![Preference set](images/Screenshot from 2024-12-25 03-41-40.png)
+![Mobile design](images/Screenshot from 2024-12-25 03-42-20.png)
